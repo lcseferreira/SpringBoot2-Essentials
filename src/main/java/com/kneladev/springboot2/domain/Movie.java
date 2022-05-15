@@ -7,5 +7,7 @@ import lombok.Data;
 @AllArgsConstructor // Construtor com todos args
 public class Movie {
     private Long id;
+
+    // @JsonProperty("name") nome da chave passado no body da requisição
     private String name;
 }

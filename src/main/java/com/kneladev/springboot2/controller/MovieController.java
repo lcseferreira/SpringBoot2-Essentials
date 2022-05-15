@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,7 +29,7 @@ public class MovieController {
     // @RequestMapping(method = RequestMethod.GET, path = "list")
     @GetMapping
     public ResponseEntity<List<Movie>> list() {
-        log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
+        // log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
         // Retornando a lista e a resposta HTTP
         return new ResponseEntity<>(movieService.listAll(), HttpStatus.OK);
         // return ResponseEntity.ok(movieService.listAll());
@@ -40,9 +37,15 @@ public class MovieController {
 
     @GetMapping(path = "{id}")
     public ResponseEntity<Movie> findById(@PathVariable long id) {
-        log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
+        // log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
         // Retornando a lista e a resposta HTTP
         return new ResponseEntity<>(movieService.findById(id), HttpStatus.OK);
         // return ResponseEntity.ok(movieService.listAll());
+    }
+
+    @PostMapping
+    // @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Movie> save(@RequestBody Movie movie) {
+        return new ResponseEntity<>(movieService.save(movie), HttpStatus.CREATED);
     }
 }
