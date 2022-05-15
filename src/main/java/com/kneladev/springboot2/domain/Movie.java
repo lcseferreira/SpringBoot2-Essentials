@@ -1,6 +1,7 @@
 package com.kneladev.springboot2.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 @AllArgsConstructor // Construtor com todos args
 @NoArgsConstructor // Construtor sem args
 @Entity // Entidade do banco
+@Builder
 public class Movie {
     @Id // É um ID
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Gera automaticamente o valor

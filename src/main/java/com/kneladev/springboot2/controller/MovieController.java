@@ -1,6 +1,8 @@
 package com.kneladev.springboot2.controller;
 
 import com.kneladev.springboot2.domain.Movie;
+import com.kneladev.springboot2.requests.movie.MoviePostRequestBody;
+import com.kneladev.springboot2.requests.movie.MoviePutRequestBody;
 import com.kneladev.springboot2.service.MovieService;
 import com.kneladev.springboot2.util.DateUtil;
 import lombok.RequiredArgsConstructor;
@@ -39,14 +41,14 @@ public class MovieController {
     public ResponseEntity<Movie> findById(@PathVariable long id) {
         // log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
         // Retornando a lista e a resposta HTTP
-        return new ResponseEntity<>(movieService.findById(id), HttpStatus.OK);
+        return new ResponseEntity<>(movieService.findByIdOrThrowBadRequestException(id), HttpStatus.OK);
         // return ResponseEntity.ok(movieService.listAll());
     }
 
     @PostMapping
     // @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Movie> save(@RequestBody Movie movie) {
-        return new ResponseEntity<>(movieService.save(movie), HttpStatus.CREATED);
+    public ResponseEntity<Movie> save(@RequestBody MoviePostRequestBody moviePostRequestBody) {
+        return new ResponseEntity<>(movieService.save(moviePostRequestBody), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "{id}")
@@ -56,8 +58,8 @@ public class MovieController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> replace(@RequestBody Movie movie) {
-        movieService.replace(movie);
+    public ResponseEntity<Void> replace(@RequestBody MoviePutRequestBody moviePutRequestBody) {
+        movieService.replace(moviePutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
