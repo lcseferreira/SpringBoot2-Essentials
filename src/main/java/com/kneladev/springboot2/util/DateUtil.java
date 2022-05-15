@@ -1,4 +1,4 @@
-package com.kneladev.springboot2essentials.util;
+package com.kneladev.springboot2.util;
 
 import org.springframework.stereotype.Component;
 
