@@ -1,6 +1,7 @@
 package com.kneladev.springboot2.service;
 
 import com.kneladev.springboot2.domain.Movie;
+import com.kneladev.springboot2.mapper.MovieMapper;
 import com.kneladev.springboot2.repository.MovieRepository;
 import com.kneladev.springboot2.requests.movie.MoviePostRequestBody;
 import com.kneladev.springboot2.requests.movie.MoviePutRequestBody;
@@ -9,9 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 // Classe responsável pela regra de negócio
 @Service
@@ -34,12 +33,13 @@ public class MovieService {
     }
 
     public Movie save(MoviePostRequestBody moviePostRequestBody) {
-        Movie movie = Movie.builder().name(moviePostRequestBody.getName()).build();
-        return movieRepository.save(movie);
+//        Movie movie = Movie.builder().name(moviePostRequestBody.getName()).build();
 
 //        movie.setId(ThreadLocalRandom.current().nextLong(3, 100000));
 //        movies.add(movie);
 //        return movie;
+
+        return movieRepository.save(MovieMapper.INSTANCE.toMovie(moviePostRequestBody));
     }
 
     public void delete(long id) {
@@ -48,14 +48,16 @@ public class MovieService {
     }
 
     public void replace(MoviePutRequestBody moviePutRequestBody) {
-        Movie savedMovie = findByIdOrThrowBadRequestException(moviePutRequestBody.getId());
-        Movie movie = Movie.builder()
-                .id(moviePutRequestBody.getId())
-                .name(moviePutRequestBody.getName())
-                .build();
+//        Movie savedMovie = findByIdOrThrowBadRequestException(moviePutRequestBody.getId());
+//        Movie movie = Movie.builder()
+//                .id(moviePutRequestBody.getId())
+//                .name(moviePutRequestBody.getName())
+//                .build();
 
-        movieRepository.save(movie);
 //        delete(movie.getId());
 //        movies.add(movie);
+
+        Movie movie = MovieMapper.INSTANCE.toMovie(moviePutRequestBody);
+        movieRepository.save(movie);
     }
 }
