@@ -7,4 +7,5 @@ import java.util.List;
 
 // Interface responsável pela conexão direta com o banco de dados
 public interface MovieRepository extends JpaRepository<Movie, Long> {
+    List<Movie> findByName(String name);
 }

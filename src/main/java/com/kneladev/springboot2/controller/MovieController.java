@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RequestMapping("movies")
@@ -42,6 +41,15 @@ public class MovieController {
         // log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
         // Retornando a lista e a resposta HTTP
         return new ResponseEntity<>(movieService.findByIdOrThrowBadRequestException(id), HttpStatus.OK);
+        // return ResponseEntity.ok(movieService.listAll());
+    }
+
+    @GetMapping(path = "/find")
+    // @RequestParam ?name=param - required = true - obrigatório a chamada de parâmetro
+    public ResponseEntity<List<Movie>> findByName(@RequestParam(required = true) String name) {
+        // log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
+        // Retornando a lista e a resposta HTTP
+        return new ResponseEntity<>(movieService.findByName(name), HttpStatus.OK);
         // return ResponseEntity.ok(movieService.listAll());
     }
 
