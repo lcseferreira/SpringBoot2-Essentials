@@ -1,14 +1,13 @@
 package com.kneladev.springboot2.service;
 
 import com.kneladev.springboot2.domain.Movie;
+import com.kneladev.springboot2.exception.BadRequestException;
 import com.kneladev.springboot2.mapper.MovieMapper;
 import com.kneladev.springboot2.repository.MovieRepository;
 import com.kneladev.springboot2.requests.movie.MoviePostRequestBody;
 import com.kneladev.springboot2.requests.movie.MoviePutRequestBody;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class MovieService {
     public Movie findByIdOrThrowBadRequestException(long id) {
         return movieRepository
                 .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Movie not found."));
+                .orElseThrow(() -> new BadRequestException("Movie not found."));
 //              .movies.stream()
 //              .filter(movie -> movie.getId().equals(id))
 //              .findFirst()

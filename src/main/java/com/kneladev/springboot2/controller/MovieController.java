@@ -19,7 +19,7 @@ import java.util.List;
 // @AllArgsConstructor // Cria um construtor com todos os atributos
 @RequiredArgsConstructor // Cria construtor com atributos que são 'final'
 public class MovieController {
-    // Injeção de dependências - usando o @AllArgsConstructor não precisa do @Autowired
+    // Injeção de dependências - usando o @RequiredArgsConstructor não precisa do @Autowired
     // @Autowired
     private final DateUtil dateUtil;
     private final MovieService movieService;
